@@ -6,10 +6,6 @@ header .nav-wrapper {
   position: fixed;
 }
 
-header {
-  height: var(--nav-height);
-}
-
 .header > div {
   display: flex;
   align-items: center;
