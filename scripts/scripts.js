@@ -54,6 +54,7 @@ function buildTabNavigation(main) {
     const sectionAnchor = document.createElement('a');
     sectionAnchor.href = `#${title.toLowerCase().replace(' ', '-')}`;
     sectionAnchor.innerText = title;
+    sectionAnchor.role = 'tab';
     if (i === 0) {
       sectionAnchor.classList.add('active');
     }
