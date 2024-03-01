@@ -84,6 +84,7 @@ h3 {
   font-size: var(--heading-font-size-l);
   text-transform: uppercase;
   padding-top: 20px;
+  text-align: left;
 }
 h4 { font-size: var(--heading-font-size-m) }
 h5 { font-size: var(--heading-font-size-s) }
