@@ -1,9 +1,9 @@
-# Your Project's Title...
-Your project's description...
+# AEM Edge Delivery Services impl. of dianalefebvre.ca
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+
+- Preview: https://main--diana-on-franklin--blefebvre.hlx.page/
+- Live: https://main--diana-on-franklin--blefebvre.hlx.live/
 
 ## Installation
 

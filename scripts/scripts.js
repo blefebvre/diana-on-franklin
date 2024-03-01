@@ -14,7 +14,7 @@ import {
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
-window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
+window.hlx.RUM_GENERATION = 'dianalefebvre.ca'; // add your RUM generation information here
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -31,6 +31,74 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildTabNavigation(main) {
+  // Find all divs that are direct descendents of main
+  const sections = Array.from(main.children).filter((el) => el.tagName === 'DIV');
+
+  // Hide all but the first one
+  sections.forEach((section, i) => {
+    if (i > 0) {
+      section.classList.add('visuallyhidden');
+    }
+  });
+
+  // Get array of section titles
+  const sectionTitles = sections.map((section) => section.querySelector('h3').innerText);
+
+  // Create the tab navigation
+  const nav = document.createElement('nav');
+  nav.classList.add('tab-nav');
+  nav.role = 'tablist';
+
+  sectionTitles.forEach((title, i) => {
+    const sectionAnchor = document.createElement('a');
+    sectionAnchor.href = `#${title.toLowerCase().replace(' ', '-')}`;
+    sectionAnchor.innerText = title;
+    sectionAnchor.role = 'tab';
+    if (i === 0) {
+      sectionAnchor.classList.add('active');
+    }
+    nav.append(sectionAnchor);
+  });
+
+  main.prepend(nav);
+
+  function openTab(hash) {
+    // Remove active class from all tabs
+    document.querySelector('nav > a.active').classList.remove('active');
+
+    sections.forEach((section) => {
+      const sectionTitle = section.querySelector('h3').innerText.toLowerCase();
+      if (`#${sectionTitle}` === hash) {
+        section.classList.remove('visuallyhidden');
+      } else {
+        section.classList.add('visuallyhidden');
+      }
+    });
+
+    document.querySelector(`nav > a[href='${hash}']`).classList.add('active');
+  }
+
+  // Listen for hash changes
+  window.addEventListener(
+    'hashchange',
+    (e) => {
+      e.preventDefault();
+      const { hash } = window.location;
+      if (hash) {
+        openTab(hash);
+      }
+    },
+    false,
+  );
+
+  // Activate tab if it's hash is provided on page load
+  const { hash: initialHash } = window.location;
+  if (initialHash) {
+    openTab(initialHash);
+  }
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -38,6 +106,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildTabNavigation(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -103,7 +172,6 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
@@ -127,5 +195,8 @@ async function loadPage() {
   await loadLazy(document);
   loadDelayed();
 }
+
+// JS is enabled! Set a class on the body to enable our 'hidden' class
+document.body.className = 'js-enabled';
 
 loadPage();

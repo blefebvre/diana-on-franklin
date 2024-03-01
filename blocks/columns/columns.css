@@ -11,6 +11,14 @@
   order: 1;
 }
 
+.columns > div > div:first-of-type {
+  flex-basis: 70%;
+}
+
+.columns > div > div:last-of-type {
+  flex-basis: 30%;
+}
+
 .columns > div > .columns-img-col {
   order: 0;
 }
