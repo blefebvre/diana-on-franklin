@@ -25,6 +25,7 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  margin: 20px auto;
 }
 
 @media (min-width: 900px) {

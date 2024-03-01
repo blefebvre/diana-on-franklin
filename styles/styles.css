@@ -72,12 +72,12 @@ h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--heading-font-size-xxl);
+  font-size: 20px;
   margin-top: 0;
 }
 
 h2 {
-  font-size: var(--heading-font-size-xl);
+  font-size: 18px;
 }
 
 h3 {
@@ -89,6 +89,17 @@ h3 {
 h4 { font-size: var(--heading-font-size-m) }
 h5 { font-size: var(--heading-font-size-s) }
 h6 { font-size: var(--heading-font-size-xs) }
+
+
+@media (min-width: 400px) {
+  h1 {
+    font-size: var(--heading-font-size-xxl);
+  }
+
+  h2 {
+    font-size: var(--heading-font-size-xl);
+  }
+}
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
