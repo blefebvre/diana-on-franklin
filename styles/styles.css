@@ -118,6 +118,9 @@ main img {
   max-width: 100%;
   width: auto;
   height: auto;
+  /* subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
 }
 
 .icon {
